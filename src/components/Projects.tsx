@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Project } from '../types';
 import { ArrowLeft, ArrowRight, Check, ChevronRight } from 'lucide-react';
+import {
+  fintechDashboardImg,
+  ecommerceShopifyImg,
+  mobileHealthImg,
+  horizonMobilityImg,
+} from '../assets/images';
+import { ImageWithFallback } from './common/ImageWithFallback';
 
 interface ProjectsProps {
   onSelectProject: (project: Project) => void;
@@ -24,7 +31,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       category: 'FINTECH SAAS',
       type: 'WEB PLATFORM',
       mockupType: 'dashboard',
-      image: '/src/assets/images/project_fintech_dashboard_1791356733788.jpg',
+      image: fintechDashboardImg,
       overview:
         'A high-concurrency cross-currency treasury platform engineered to automate multi-asset FX liquidity, real-time desk settlement, and compliance reporting.',
       technologies: ['Next.js', 'React', 'Node.js', '.NET', 'PostgreSQL'],
@@ -58,7 +65,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       category: 'E-COMMERCE',
       type: 'SHOPIFY PLUS',
       mockupType: 'ecommerce',
-      image: '/src/assets/images/project_ecommerce_shopify_1791356747561.jpg',
+      image: ecommerceShopifyImg,
       overview:
         'A bespoke luxury direct-to-consumer flagship storefront engineered with custom Liquid templating, instant AJAX cart drawer flows, and international checkout speed.',
       technologies: ['Shopify Plus', 'Liquid', 'React', 'Tailwind', 'Storefront API'],
@@ -92,7 +99,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       category: 'HEALTHCARE',
       type: 'MOBILE APP',
       mockupType: 'mobile',
-      image: '/src/assets/images/project_mobile_health_1791356758562.jpg',
+      image: mobileHealthImg,
       overview:
         'A medical-grade cross-platform patient telemetry application delivering offline sensor data persistence, real-time vital analysis, and biometric authentication.',
       technologies: ['React Native', 'Firebase', 'Node.js', 'Express', 'SQLite'],
@@ -126,7 +133,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       category: 'TRANSPORTATION',
       type: 'FULL-STACK SUITE',
       mockupType: 'web',
-      image: '/src/assets/images/project_horizon_mobility_1791357796886.jpg',
+      image: horizonMobilityImg,
       overview:
         'An enterprise passenger dispatch and corporate fleet management system engineered to orchestrate real-time ride routing, booking dispatch, and automated accounting.',
       technologies: ['React', 'Next.js', 'Node.js', 'MySQL', 'WebSockets'],
@@ -302,11 +309,12 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                   </div>
 
                   {/* Screenshot Container */}
-                  <div className="relative rounded-[12px] overflow-hidden bg-[#0F172A] aspect-[16/10] sm:aspect-[16/9]">
-                    <img
+                  <div className="relative rounded-[12px] overflow-hidden bg-[#0F172A]">
+                    <ImageWithFallback
                       src={currentProject.image}
                       alt={currentProject.title}
-                      referrerPolicy="no-referrer"
+                      aspectRatioClass="aspect-[16/10] sm:aspect-[16/9]"
+                      loading="lazy"
                       className="w-full h-full object-cover object-top rounded-[12px] transition-transform duration-500 ease-out group-hover:scale-[1.015]"
                     />
 

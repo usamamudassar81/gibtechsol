@@ -15,6 +15,13 @@ import {
   Sparkles
 } from 'lucide-react';
 import { Project } from '../types';
+import {
+  taskflowMernImg,
+  wordpressGrowthImg,
+  ecommerceShopifyImg,
+  figmaUiuxImg,
+} from '../assets/images';
+import { ImageWithFallback } from '../components/common/ImageWithFallback';
 
 interface PortfolioPageProps {
   onSelectProject: (project: Project) => void;
@@ -37,7 +44,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
       portfolioCategory: 'mern',
       badge: 'MERN STACK',
       type: 'WEB APPLICATION',
-      image: '/src/assets/images/taskflow_mern_mockup_1791362064954.jpg',
+      image: taskflowMernImg,
       overview:
         'A powerful project management platform built with the MERN stack, designed to help distributed teams manage workflows, track sprint velocity and collaborate efficiently.',
       technologies: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'Tailwind CSS'],
@@ -74,7 +81,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
       portfolioCategory: 'wordpress',
       badge: 'WORDPRESS',
       type: 'CORPORATE PORTAL',
-      image: '/src/assets/images/wordpress_growth_mockup_1791362086772.jpg',
+      image: wordpressGrowthImg,
       overview:
         'A modern WordPress corporate portal with custom theme engineering, advanced plugin architecture and optimized performance, designed to elevate brand authority and capture high-value enterprise leads.',
       technologies: ['WordPress', 'PHP', 'Custom Theme', 'ACF Pro', 'WooCommerce', 'Tailwind CSS'],
@@ -111,7 +118,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
       portfolioCategory: 'shopify',
       badge: 'SHOPIFY',
       type: 'E-COMMERCE STORE',
-      image: '/src/assets/images/project_ecommerce_shopify_1791356747561.jpg',
+      image: ecommerceShopifyImg,
       overview:
         'A fully functional direct-to-consumer Shopify store with a minimalist editorial design, multi-currency checkout and seamless drawer cart experience, built to convert shoppers into repeat buyers.',
       technologies: ['Shopify Plus', 'Liquid', 'JavaScript', 'Storefront API', 'Tailwind CSS'],
@@ -148,7 +155,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
       portfolioCategory: 'figma',
       badge: 'FIGMA',
       type: 'MOBILE DESIGN SYSTEM',
-      image: '/src/assets/images/figma_uiux_mockup_1791362110374.jpg',
+      image: figmaUiuxImg,
       overview:
         'A clean and intuitive mobile banking design system engineered for a next-generation fintech platform, prioritizing clarity, accessibility and friction-free multi-currency transfers.',
       technologies: ['Figma', 'Design Systems', 'User Research', 'Interactive Prototyping', 'iOS HIG'],
@@ -355,10 +362,11 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({
                             className="group relative rounded-[20px] overflow-hidden border border-[#CBD5E1] bg-[#F8FAFC] shadow-[0_12px_36px_-6px_rgba(15,23,42,0.08)] cursor-pointer"
                           >
                             {/* Project presentation screenshot */}
-                            <div className="aspect-[16/10] overflow-hidden bg-[#0B1528] relative">
-                              <img
+                            <div className="relative">
+                              <ImageWithFallback
                                 src={project.image}
                                 alt={`${project.title} - ${project.category} Showcase`}
+                                aspectRatioClass="aspect-[16/10]"
                                 className="w-full h-full object-cover object-center group-hover:scale-[1.015] transition-transform duration-350 ease-out"
                                 loading={catIdx === 0 ? 'eager' : 'lazy'}
                               />

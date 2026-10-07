@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { TrustBar } from './components/TrustBar';
@@ -11,11 +11,30 @@ import { Growth } from './components/Growth';
 import { Testimonials } from './components/Testimonials';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
-import { ProjectModal } from './components/ProjectModal';
-import { StrategyModal } from './components/StrategyModal';
-import { ServicesPage } from './pages/ServicesPage';
-import { PortfolioPage } from './pages/PortfolioPage';
 import { Project } from './types';
+
+// Lazy-load secondary routes and modals to optimize initial bundle size & performance
+const ServicesPage = lazy(() =>
+  import('./pages/ServicesPage').then((m) => ({ default: m.ServicesPage }))
+);
+const PortfolioPage = lazy(() =>
+  import('./pages/PortfolioPage').then((m) => ({ default: m.PortfolioPage }))
+);
+const ProjectModal = lazy(() =>
+  import('./components/ProjectModal').then((m) => ({ default: m.ProjectModal }))
+);
+const StrategyModal = lazy(() =>
+  import('./components/StrategyModal').then((m) => ({ default: m.StrategyModal }))
+);
+
+const PageLoadingFallback = () => (
+  <div className="min-h-[50vh] flex items-center justify-center pt-28">
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-8 h-8 rounded-full border-2 border-[#2563EB]/20 border-t-[#2563EB] animate-spin" />
+      <span className="text-xs text-[#64748B] font-medium font-mono">Loading...</span>
+    </div>
+  </div>
+);
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -82,87 +101,95 @@ export default function App() {
       />
 
       <main className="flex-1">
-        {isPortfolioPage ? (
-          /* Dedicated Projects / Portfolio Page */
-          <PortfolioPage
-            onSelectProject={(project) => setSelectedProject(project)}
-            onOpenConsultation={(service) => {
-              if (service) {
-                setSelectedServiceForContact(service);
-              }
-              setStrategyModalOpen(true);
-            }}
-            onNavigateServices={() => handleNavigate('/services')}
-          />
-        ) : isServicesPage ? (
-          /* Dedicated Services Page */
-          <ServicesPage
-            onOpenConsultation={(service) => {
-              if (service) {
-                setSelectedServiceForContact(service);
-              }
-              setStrategyModalOpen(true);
-            }}
-            onNavigateHome={(anchor) => handleNavigate('/', anchor)}
-          />
-        ) : (
-          /* Homepage */
-          <>
-            {/* 2. Hero Section */}
-            <Hero
-              onOpenStrategyModal={() => setStrategyModalOpen(true)}
-              onOpenProjectModal={() => scrollToContact('General Inquiry')}
-              onExploreServices={scrollToServices}
+        <Suspense fallback={<PageLoadingFallback />}>
+          {isPortfolioPage ? (
+            /* Dedicated Projects / Portfolio Page */
+            <PortfolioPage
+              onSelectProject={(project) => setSelectedProject(project)}
+              onOpenConsultation={(service) => {
+                if (service) {
+                  setSelectedServiceForContact(service);
+                }
+                setStrategyModalOpen(true);
+              }}
+              onNavigateServices={() => handleNavigate('/services')}
             />
+          ) : isServicesPage ? (
+            /* Dedicated Services Page */
+            <ServicesPage
+              onOpenConsultation={(service) => {
+                if (service) {
+                  setSelectedServiceForContact(service);
+                }
+                setStrategyModalOpen(true);
+              }}
+              onNavigateHome={(anchor) => handleNavigate('/', anchor)}
+            />
+          ) : (
+            /* Homepage */
+            <>
+              {/* 2. Hero Section */}
+              <Hero
+                onOpenStrategyModal={() => setStrategyModalOpen(true)}
+                onOpenProjectModal={() => scrollToContact('General Inquiry')}
+                onExploreServices={scrollToServices}
+              />
 
-            {/* 3. Trust Bar */}
-            <TrustBar />
+              {/* 3. Trust Bar */}
+              <TrustBar />
 
-            {/* 4. Who We Are */}
-            <WhoWeAre />
+              {/* 4. Who We Are */}
+              <WhoWeAre />
 
-            {/* 5. Services Section */}
-            <Services onSelectService={scrollToContact} />
+              {/* 5. Services Section */}
+              <Services onSelectService={scrollToContact} />
 
-            {/* 6. How We Work / Process Section */}
-            <Process />
+              {/* 6. How We Work / Process Section */}
+              <Process />
 
-            {/* 7. Capabilities Section */}
-            <Capabilities onOpenConsultation={() => setStrategyModalOpen(true)} />
+              {/* 7. Capabilities Section */}
+              <Capabilities onOpenConsultation={() => setStrategyModalOpen(true)} />
 
-            {/* 8. Projects Section */}
-            <Projects onSelectProject={(project) => setSelectedProject(project)} />
+              {/* 8. Projects Section */}
+              <Projects onSelectProject={(project) => setSelectedProject(project)} />
 
-            {/* 9. Growth & Business Impact Section */}
-            <Growth />
+              {/* 9. Growth & Business Impact Section */}
+              <Growth />
 
-            {/* 10. Testimonials */}
-            <Testimonials />
+              {/* 10. Testimonials */}
+              <Testimonials />
 
-            {/* 11. Final CTA & Frictionless Briefing Form */}
-            <FinalCTA initialService={selectedServiceForContact} />
-          </>
-        )}
+              {/* 11. Final CTA & Frictionless Briefing Form */}
+              <FinalCTA initialService={selectedServiceForContact} />
+            </>
+          )}
+        </Suspense>
       </main>
 
       {/* 12. Footer */}
       <Footer />
 
-      {/* Interactive Case Study Detail Modal */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-        onOpenContact={(service) => {
-          setSelectedProject(null);
-          scrollToContact(service);
-        }}
-      />
+      {/* Interactive Case Study Detail Modal (Lazy loaded) */}
+      <Suspense fallback={null}>
+        {selectedProject && (
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+            onOpenContact={(service) => {
+              setSelectedProject(null);
+              scrollToContact(service);
+            }}
+          />
+        )}
 
-      {/* Interactive Strategy Call Booking Modal */}
-      <StrategyModal
-        isOpen={strategyModalOpen}
-        onClose={() => setStrategyModalOpen(false)}
-      />
+        {/* Interactive Strategy Call Booking Modal (Lazy loaded) */}
+        {strategyModalOpen && (
+          <StrategyModal
+            isOpen={strategyModalOpen}
+            onClose={() => setStrategyModalOpen(false)}
+          />
+        )}
+      </Suspense>
     </div>
   );
 }

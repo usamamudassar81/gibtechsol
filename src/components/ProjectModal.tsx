@@ -1,6 +1,7 @@
 import React from 'react';
 import { Project } from '../types';
 import { X, Check, ArrowRight } from 'lucide-react';
+import { ImageWithFallback } from './common/ImageWithFallback';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -48,10 +49,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
         {/* Image Preview Banner */}
         <div className="relative rounded-[16px] overflow-hidden mb-8 h-64 sm:h-80 bg-[#0F172A] border border-[#E2E8F0]">
-          <img
+          <ImageWithFallback
             src={project.image}
             alt={project.title}
-            referrerPolicy="no-referrer"
+            aspectRatioClass="h-full w-full"
             className="w-full h-full object-cover object-center"
           />
         </div>

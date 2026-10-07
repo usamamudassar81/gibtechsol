@@ -21,6 +21,8 @@ import {
   Check
 } from 'lucide-react';
 import { Process } from '../components/Process';
+import { servicesHeroMockupImg } from '../assets/images';
+import { ImageWithFallback } from '../components/common/ImageWithFallback';
 
 interface ServicesPageProps {
   onOpenConsultation: (service?: string) => void;
@@ -200,11 +202,13 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             <div className="lg:col-span-5 relative flex justify-center items-center">
               <div className="relative w-full max-w-[480px] rounded-[24px] overflow-hidden border border-[#E2E8F0] shadow-[0_20px_50px_-10px_rgba(15,23,42,0.12)] bg-[#0B1528] group">
                 {/* Background high-tech visual */}
-                <img
-                  src="/src/assets/images/services_hero_mockup_1791360900873.jpg"
+                <ImageWithFallback
+                  src={servicesHeroMockupImg}
                   alt="GitTechSols Digital Product Engineering devices mockup"
-                  className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                  aspectRatioClass="aspect-[16/9]"
+                  className="w-full h-full object-cover transform group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                   loading="eager"
+                  fetchPriority="high"
                 />
 
                 {/* Ambient glow & glass highlights */}
