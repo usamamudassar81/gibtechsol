@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary: #2563EB;
+    --color-primary-hover: #1D4ED8;
+    --color-heading: #0F172A;
+    --color-body: #475569;
+    --color-background: #FFFFFF;
+    --color-surface: #F8FAFC;
+    --color-border: #E2E8F0;
+    --color-dark-widget: #020617;
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-pill: 9999px;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-heading);
+    overflow-x: hidden;
+  }
+}
+
+/* Subtle architectural grid background */
+.tech-grid-light {
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Subtle device float animations */
+@keyframes float-laptop {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes float-phone {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes float-card {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-float-laptop {
+  animation: float-laptop 5s ease-in-out infinite;
+}
+
+.animate-float-phone {
+  animation: float-phone 6.2s ease-in-out infinite;
+}
+
+.animate-float-card {
+  animation: float-card 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-laptop,
+  .animate-float-phone,
+  .animate-float-card {
+    animation: none !important;
+  }
+}
+
+/* Clean Master Navbar */
+.nav-floating-light {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.nav-floating-scrolled {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.07);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2563EB;
+}
+
+/* Fluid Typography and Density Optimization */
+.text-fluid-hero {
+  font-size: clamp(2rem, 3.8vw, 3.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.text-fluid-h2 {
+  font-size: clamp(1.65rem, 2.5vw, 2.35rem);
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+}
+
+.text-fluid-h3 {
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+  line-height: 1.25;
+}
+
+.text-fluid-body {
+  font-size: clamp(0.925rem, 0.95vw, 1.025rem);
+  line-height: 1.6;
+}
+
+
