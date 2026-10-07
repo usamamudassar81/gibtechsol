@@ -300,7 +300,7 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
 
                     <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#FFFFFF] border border-[#E2E8F0] text-[10px] font-mono text-[#64748B] max-w-[240px] truncate">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
-                      <span>https://app.gittechsols.com/{currentProject.id}</span>
+                      <span>https://app.gibtechsols.com/{currentProject.id}</span>
                     </div>
 
                     <div className="text-[9px] font-mono font-semibold uppercase tracking-wider text-[#64748B]">
