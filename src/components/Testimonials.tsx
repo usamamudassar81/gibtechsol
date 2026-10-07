@@ -6,7 +6,7 @@ export const Testimonials: React.FC = () => {
     {
       id: 1,
       quote:
-        'GitTechSols rebuilt our core B2B portal in Next.js and Node.js with precision. We shaved over a second off every interactive page load and onboarded enterprise customers without a single deployment hitch.',
+        'GibTechSol rebuilt our core B2B portal in Next.js and Node.js with precision. We shaved over a second off every interactive page load and onboarded enterprise customers without a single deployment hitch.',
       name: 'Marcus Sterling',
       role: 'Chief Technology Officer',
       company: 'OmniTrade Logistics (London, UK)',
@@ -24,7 +24,7 @@ export const Testimonials: React.FC = () => {
     {
       id: 3,
       quote:
-        'Finding an engineering partner that understands both Figma design systems and robust backend microservices is rare. GitTechSols delivered our cross-platform mobile app on time, with flawless offline data sync.',
+        'Finding an engineering partner that understands both Figma design systems and robust backend microservices is rare. GibTechSols delivered our cross-platform mobile app on time, with flawless offline data sync.',
       name: 'Dr. Julian Vane',
       role: 'Head of Product Engineering',
       company: 'PulseHealth Labs (Zurich, CH)',
@@ -44,7 +44,7 @@ export const Testimonials: React.FC = () => {
             Trusted by Leaders in the UK, US &amp; Global Markets
           </h2>
           <p className="text-[14px] sm:text-[15px] text-[#475569] leading-relaxed">
-            Direct feedback from product heads, CTOs, and founders who trust GitTechSols to engineer mission-critical systems.
+            Direct feedback from product heads, CTOs, and founders who trust GibTechSols to engineer mission-critical systems.
           </p>
         </div>
 

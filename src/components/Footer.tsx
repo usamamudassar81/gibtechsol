@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
               <div className="w-7 h-7 rounded-lg bg-[#2563EB] flex items-center justify-center text-white">
                 <Code2 className="w-4 h-4" />
               </div>
-              <span>GitTechSols</span>
+              <span>GibTechSols</span>
             </a>
             <p className="text-[14px] text-[#475569] leading-relaxed max-w-sm mb-6">
               Premium digital product engineering &amp; IT solutions studio. Delivering production-grade web applications, native mobile experiences, and scalable cloud architectures for international business leaders.
@@ -164,7 +164,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar: Copyright & Scroll to top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
           <div className="flex items-center gap-4">
-            <span>© {currentYear} GitTechSols Ltd. All rights reserved.</span>
+            <span>© {currentYear} GibTechSols Ltd. All rights reserved.</span>
             <span aria-hidden="true">·</span>
             <span>Privacy Policy</span>
             <span aria-hidden="true">·</span>

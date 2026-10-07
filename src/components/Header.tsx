@@ -122,12 +122,12 @@ export const Header: React.FC<HeaderProps> = ({
             href="#hero"
             onClick={(e) => handleNavClick(e, '#hero', 'hero')}
             className="flex items-center gap-2.5 text-[18px] sm:text-[20px] font-bold text-[#0F172A] tracking-tight hover:opacity-95 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] rounded-lg"
-            aria-label="GitTechSols Home"
+            aria-label="GibTechSols Home"
           >
             <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center text-white shadow-sm shadow-[#2563EB]/25">
               <Code2 className="w-4 h-4" />
             </div>
-            <span>GitTechSols</span>
+            <span>GibTechSols</span>
           </a>
 
           {/* Desktop Navigation (Zone 2: 4-6 text links, 14px / 500) */}

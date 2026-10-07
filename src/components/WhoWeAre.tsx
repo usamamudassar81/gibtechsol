@@ -41,7 +41,7 @@ export const WhoWeAre: React.FC = () => {
           {/* Right Column */}
           <div className="lg:col-span-6 lg:pt-1">
             <p className="text-[15px] sm:text-[16px] text-[#475569] leading-[1.6] mb-4">
-              GitTechSols is a dedicated digital product engineering and IT solutions studio. We partner with founders, scale-ups, and international enterprises across the UK, US, and Europe to design, engineer, and deploy high-performing digital systems.
+              GibTechSol is a dedicated digital product engineering and IT solutions studio. We partner with founders, scale-ups, and international enterprises across the UK, US, and Europe to design, engineer, and deploy high-performing digital systems.
             </p>
             <p className="text-[14px] sm:text-[15px] text-[#64748B] leading-[1.6]">
               Unlike traditional agencies that pass tickets through layers of account managers, our senior engineers and product designers work directly with your stakeholders from Figma canvas to production cloud infrastructure.
