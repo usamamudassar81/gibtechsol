@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { pageVisibility } from '../config/pageVisibility';
 import {
   ArrowRight,
   TrendingUp,
@@ -67,13 +68,15 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mb-7">
-              <button
-                onClick={onOpenStrategyModal}
-                className="h-[44px] px-6 rounded-full text-[14px] sm:text-[15px] font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(37,99,235,0.18)] active:translate-y-0 transition-all duration-180 flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
-              >
-                <span>Book a Strategy Call</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              {pageVisibility.bookingStrategyCall && (
+                <button
+                  onClick={onOpenStrategyModal}
+                  className="h-[44px] px-6 rounded-full text-[14px] sm:text-[15px] font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(37,99,235,0.18)] active:translate-y-0 transition-all duration-180 flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                >
+                  <span>Book a Strategy Call</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              )}
 
               <button
                 onClick={onExploreServices}

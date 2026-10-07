@@ -54,18 +54,37 @@ export const Header: React.FC<HeaderProps> = ({
   }, [currentPath]);
 
   const navLinks = [
-    { name: 'Home', href: '#hero', id: 'hero' },
+    { name: 'Home', href: '/', id: 'home' },
+    { name: 'About', href: '/about', id: 'about' },
     { name: 'Services', href: '/services', id: 'services' },
-    { name: 'Process', href: '#process', id: 'process' },
-    { name: 'Capabilities', href: '#capabilities', id: 'capabilities' },
+    { name: 'Process', href: '/#process', id: 'process' },
     { name: 'Portfolio', href: '/portfolio', id: 'portfolio' },
-    { name: 'About', href: '#who-we-are', id: 'who-we-are' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: 'Contact', href: '/#contact', id: 'contact' },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, id: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+
+    if (id === 'home' || href === '/') {
+      if (onNavigate) {
+        onNavigate('/');
+      } else {
+        window.history.pushState(null, '', '/');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (id === 'about' || href === '/about') {
+      if (onNavigate) {
+        onNavigate('/about');
+      } else {
+        window.history.pushState(null, '', '/about');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
 
     if (id === 'services' || href === '/services') {
       if (onNavigate) {
@@ -87,23 +106,24 @@ export const Header: React.FC<HeaderProps> = ({
       return;
     }
 
-    // Navigating to a hash anchor on Home
-    if (currentPath !== '/') {
-      if (onNavigate) {
-        onNavigate('/', href);
-      } else {
-        window.history.pushState(null, '', '/');
-        const element = document.querySelector(href);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+    // For hash anchors like /#process or /#contact
+    if (href.startsWith('/#')) {
+      const hash = href.replace('/', '');
+      if (currentPath !== '/') {
+        if (onNavigate) {
+          onNavigate('/', hash);
+        } else {
+          window.history.pushState(null, '', '/');
+          setTimeout(() => {
+            const el = document.querySelector(hash);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 50);
         }
+      } else {
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       }
       return;
-    }
-
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

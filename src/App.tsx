@@ -1,4 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { pageVisibility } from './config/pageVisibility';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { TrustBar } from './components/TrustBar';
@@ -19,6 +20,9 @@ const ServicesPage = lazy(() =>
 );
 const PortfolioPage = lazy(() =>
   import('./pages/PortfolioPage').then((m) => ({ default: m.PortfolioPage }))
+);
+const AboutPage = lazy(() =>
+  import('./pages/AboutPage').then((m) => ({ default: m.AboutPage }))
 );
 const ProjectModal = lazy(() =>
   import('./components/ProjectModal').then((m) => ({ default: m.ProjectModal }))
@@ -90,6 +94,7 @@ export default function App() {
 
   const isServicesPage = currentPath === '/services';
   const isPortfolioPage = currentPath === '/portfolio';
+  const isAboutPage = currentPath === '/about';
 
   return (
     <div className="min-h-screen bg-[#FFFFFF] text-[#0F172A] selection:bg-[#2563EB]/20 selection:text-[#0F172A] flex flex-col antialiased">
@@ -102,7 +107,14 @@ export default function App() {
 
       <main className="flex-1">
         <Suspense fallback={<PageLoadingFallback />}>
-          {isPortfolioPage ? (
+          {isAboutPage ? (
+            /* Dedicated About Us Page */
+            <AboutPage
+              onExploreServices={() => handleNavigate('/services')}
+              onExploreProcess={() => handleNavigate('/', '#process')}
+              onGetStarted={() => scrollToContact('General Inquiry')}
+            />
+          ) : isPortfolioPage ? (
             /* Dedicated Projects / Portfolio Page */
             <PortfolioPage
               onSelectProject={(project) => setSelectedProject(project)}
@@ -139,22 +151,24 @@ export default function App() {
               <TrustBar />
 
               {/* 4. Who We Are */}
-              <WhoWeAre />
+              {pageVisibility.whoWeAre && <WhoWeAre />}
 
               {/* 5. Services Section */}
               <Services onSelectService={scrollToContact} />
 
               {/* 6. How We Work / Process Section */}
-              <Process />
+              {pageVisibility.howWeWork && <Process />}
 
               {/* 7. Capabilities Section */}
               <Capabilities onOpenConsultation={() => setStrategyModalOpen(true)} />
 
               {/* 8. Projects Section */}
-              <Projects onSelectProject={(project) => setSelectedProject(project)} />
+              {pageVisibility.selectedProjects && (
+                <Projects onSelectProject={(project) => setSelectedProject(project)} />
+              )}
 
               {/* 9. Growth & Business Impact Section */}
-              <Growth />
+              {pageVisibility.businessImpactGrowth && <Growth />}
 
               {/* 10. Testimonials */}
               <Testimonials />

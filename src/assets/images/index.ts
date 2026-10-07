@@ -19,6 +19,12 @@ export {
   servicesHeroMockupImg,
 };
 
+// Clean non-duplicated exported aliases for About page components
+export const whoWeAreOfficeImg = wordpressGrowthImg;
+export const missionVisionWorldImg = fintechDashboardImg;
+export const whatWeDoEngineerImg = figmaUiuxImg;
+export const aboutHeroImg = servicesHeroMockupImg;
+
 // Safe image lookup map
 export const projectImageMap: Record<string, string> = {
   'fintech-apex': fintechDashboardImg,
